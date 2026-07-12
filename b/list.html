@@ -1,13 +1,17 @@
-<h1>BENCH · Liste (FINAL)</h1>
+<h1>OI · LIST</h1>
 
 <pre>
-H = Höhe
-B = Breite
-T = Tiefe
+LIST zeigt die Station OI und ihren RESPO‑Träger.
+TRANSPARENT = TRUE
+WAHRHEIT = TRUE
+SYSTEM = OFF
+IKI = OFF
+MARKT = TRUE
+
+Pipeline:
+[0] RESPO.STATUS → OI
 </pre>
 
 <ul>
-  <li><a href="./H/index.html">H – Höhe</a></li>
-  <li><a href="./B/index.html">B – Breite</a></li>
-  <li><a href="./T/index.html">T – Tiefe</a></li>
+  <li>[OI](ca://s?q=OI_erklaeren) → RESPO.STATUS → Stufe 0</li>
 </ul>
