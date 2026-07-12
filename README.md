@@ -1,23 +1,17 @@
-# iki1uc – ROOT
+# OI – Origin / Status
 
-## Zweck
-Dieses Repository bildet den Ursprung der gesamten Struktur.  
-Es stellt die öffentliche Identität des Systems bereit und dient  
-als Einstiegspunkt für alle Module, Achsen und Bereiche.
+OI ist die Startstation der BENCH‑Pipeline.
 
-## Identität
-- CORE: iki1uc  
-- VERSION: 1.0  
-- CODE: RAW  
-- LAGE: ROOT / Creator / NC  
-- STATUS: Online  
+RESPO‑Träger:
+- RESPO.STATUS → Stufe 0
 
-## Inhalt
-- index.html – öffentliche Landing‑Page  
-- ID.html – Identitätsdarstellung  
-- visual/ – Visualisierungen  
-- modules/ – Verlinkte System‑Repos  
+Eigenschaften:
+- SYSTEM = OFF
+- IKI = OFF
+- MARKT = TRUE
+- TRANSPARENT = TRUE
+- INTERN = TRUE
 
-## Hinweis
-Dieses Repository enthält keine Engine‑Mechanismen.  
-Es dient ausschließlich der öffentlichen Darstellung und Struktur.
+Pipeline:
+0 → 1 → 2 → 4
+OI → DIM → IO → VAL
