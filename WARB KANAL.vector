@@ -1,0 +1,8 @@
+KANAL.oi {
+  DIR: output,
+  FLOW: -1,
+  SCALE: Φ(t),
+  MODE: continuum,
+  AXIS: AIR ↕ AIV,
+  OPERATOR: XI
+}
