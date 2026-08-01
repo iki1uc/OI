@@ -31,6 +31,7 @@
     <li><a href="Slalom.vector">Slalom</a></li>
     <li><a href="TRANS.vector">TRANS‑WARB</a></li>
     <li><a href="WARB KANAL.vector">KANAL‑oi</a></li>
+    <li><a href="RECHNUNG.js">Transport‑Rechnung</a></li>
     <li><a href="continuumSlide.js">continuumSlide</a></li>
     <li><a href="axiom-dreieck-6.csv">Axiom‑Dreieck‑6</a></li>
     <li><a href="modul-io-8.csv">Modul‑IO‑8</a></li>
@@ -41,12 +42,6 @@
   <div class="title">Unendlichkeits‑Operator</div>
   <pre>
 K(t) = 1 / (1 - t)
-  </pre>
-</div>
-
-<div class="box">
-  <div class="title">Φ‑Skalierung</div>
-  <pre>
 Φ(t) = φ∞ · K(t)
   </pre>
 </div>
@@ -55,20 +50,31 @@ K(t) = 1 / (1 - t)
   <div class="title">Transport‑Rechnung (OI)</div>
   <pre>
 T_oi(t) = -Δx · K(t)
-  </pre>
-</div>
-
-<div class="box">
-  <div class="title">Dual‑Transport</div>
-  <pre>
 io = +Δx · K(t)
 oi = -Δx · K(t)
   </pre>
 </div>
 
 <div class="box">
+  <div class="title">Dual‑Transport</div>
+  <pre>
+function dualTransport(io, oi, dx, t) {
+    const K = 1 / (1 - t);
+    io.value = dx * K;
+    oi.value = -dx * K;
+}
+  </pre>
+</div>
+
+<div class="box">
   <div class="title">Routing</div>
   <pre>
+EAR = anchor
+EON = stabilize
+EXP = expand
+AIR = up
+AIV = down
+
 oi → AIR ↕ AIV
   </pre>
 </div>
