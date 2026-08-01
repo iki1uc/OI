@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>OI · Vertikal‑Output · RAW</title>
+<title>OI · Output‑Index · RAW</title>
 
 <style>
   body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
@@ -25,12 +25,15 @@
   <ul>
     <li><a href="ID.html">ID</a></li>
     <li><a href="README.md">README</a></li>
-    <li><a href="DualTr.vector">DualTransport</a></li>
+    <li><a href="DualTr">DualTransport</a></li>
     <li><a href="Highway.vector">Highway</a></li>
     <li><a href="Routing.vector">Routing</a></li>
     <li><a href="Slalom.vector">Slalom</a></li>
     <li><a href="TRANS.vector">TRANS‑WARB</a></li>
-    <li><a href="Φ‑Axiom.vector">Φ‑Axiom</a></li>
+    <li><a href="WARB KANAL.vector">KANAL‑oi</a></li>
+    <li><a href="continuumSlide.js">continuumSlide</a></li>
+    <li><a href="axiom-dreieck-6.csv">Axiom‑Dreieck‑6</a></li>
+    <li><a href="modul-io-8.csv">Modul‑IO‑8</a></li>
   </ul>
 </div>
 
@@ -49,7 +52,7 @@ K(t) = 1 / (1 - t)
 </div>
 
 <div class="box">
-  <div class="title">Transport‑Rechnung</div>
+  <div class="title">Transport‑Rechnung (OI)</div>
   <pre>
 T_oi(t) = -Δx · K(t)
   </pre>
@@ -58,23 +61,14 @@ T_oi(t) = -Δx · K(t)
 <div class="box">
   <div class="title">Dual‑Transport</div>
   <pre>
-function dualTransport(io, oi, dx, t) {
-    const K = 1 / (1 - t);
-    io.value = dx * K;
-    oi.value = -dx * K;
-}
+io = +Δx · K(t)
+oi = -Δx · K(t)
   </pre>
 </div>
 
 <div class="box">
   <div class="title">Routing</div>
   <pre>
-EAR = anchor
-EON = stabilize
-EXP = expand
-AIR = up
-AIV = down
-
 oi → AIR ↕ AIV
   </pre>
 </div>
@@ -101,8 +95,9 @@ SLIDE: continuum
 </div>
 
 <div class="box">
-  <div class="title">TRANS‑WARB Modul</div>
+  <div class="title">TRANS‑WARB</div>
   <pre>
+io: KANAL.io
 oi: KANAL.oi
 SCALE: Φ(t)
 TRANSPORT: T_oi(t)
@@ -111,6 +106,14 @@ AXIOME: Komplettum.Achsen
 OPERATOR: { XI, IX, X4 }
 HIGHWAY: Highway
 SLALOM: Slalom
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Reise‑Formel</div>
+  <pre>
+HOME → (6 Axiome) → ORT
+→ TRANS‑WARB → CUBIT → TRANS‑WARB → ZIEL
   </pre>
 </div>
 
