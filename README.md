@@ -1,17 +1,31 @@
-# OI – Origin / Status
+OI.README {
 
-OI ist die Startstation der BENCH‑Pipeline.
+  KONTINUUM:
+    K(t) = 1 / (1 - t)
+    Φ(t) = φ∞ · K(t)
 
-RESPO‑Träger:
-- RESPO.STATUS → Stufe 0
+  TRANSPORT:
+    io = +Δx · K(t)
+    oi = -Δx · K(t)
 
-Eigenschaften:
-- SYSTEM = OFF
-- IKI = OFF
-- MARKT = TRUE
-- TRANSPARENT = TRUE
-- INTERN = TRUE
+  ACHSEN:
+    EAR = anchor
+    EON = stabilize
+    EXP = expand
+    AIR = up
+    AIV = down
 
-Pipeline:
-0 → 1 → 2 → 4
-OI → DIM → IO → VAL
+  ROUTING:
+    io → EAR → EON → EXP
+    oi → AIR ↕ AIV
+
+  HIGHWAY:
+    MODE = 5-Achs
+    OPERATOR = XI
+    PATH = linear
+
+  SLALOM:
+    RESPO = 3
+    TARGET = 4
+    PATH = EAR → EON → EXP → AIR → AIV
+}
