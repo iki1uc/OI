@@ -1,14 +1,125 @@
-<h1>OI · Index</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>OI · Vertikal‑Output · RAW</title>
 
-<ul>
-  <li><a href="ID.html">ID</a></li>
-  <li><a href="README.md">README</a></li>
-  <li><a href="l.html">LIST</a></li>
-  <li><a href="r.html">RUN</a></li>
-  <li><a href="s.html">SCORE</a></li>
-  <li><a href="c.html">4×4‑Modul</a></li>
-  <li><a href="cc.html">8×8‑Modul</a></li>
-  <li><a href="ccc.html">81‑Modul</a></li>
-  <li><a href="fin.html">Final‑Modul</a></li>
-  <li><a href="time_3x11_scroll_zoom.html">TIME 3×11</a></li>
-</ul>
+<style>
+  body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
+  h1 { color:#ff6666; text-align:center; margin-bottom:30px; }
+  .box { background:#111; border:1px solid #333; padding:20px; margin-bottom:25px; }
+  .title { color:#ff6666; font-size:18px; margin-bottom:10px; }
+  pre { background:#000; padding:10px; border-left:3px solid #ff6666; white-space:pre-wrap; }
+  ul { list-style:none; padding:0; }
+  li { margin:8px 0; }
+  a { color:#6cf; text-decoration:none; }
+</style>
+</head>
+
+<body>
+
+<h1>OI · Output‑Index</h1>
+
+<div class="box">
+  <div class="title">Navigation</div>
+  <ul>
+    <li><a href="ID.html">ID</a></li>
+    <li><a href="README.md">README</a></li>
+    <li><a href="DualTr.vector">DualTransport</a></li>
+    <li><a href="Highway.vector">Highway</a></li>
+    <li><a href="Routing.vector">Routing</a></li>
+    <li><a href="Slalom.vector">Slalom</a></li>
+    <li><a href="TRANS.vector">TRANS‑WARB</a></li>
+    <li><a href="Φ‑Axiom.vector">Φ‑Axiom</a></li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="title">Unendlichkeits‑Operator</div>
+  <pre>
+K(t) = 1 / (1 - t)
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Φ‑Skalierung</div>
+  <pre>
+Φ(t) = φ∞ · K(t)
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Transport‑Rechnung</div>
+  <pre>
+T_oi(t) = -Δx · K(t)
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Dual‑Transport</div>
+  <pre>
+function dualTransport(io, oi, dx, t) {
+    const K = 1 / (1 - t);
+    io.value = dx * K;
+    oi.value = -dx * K;
+}
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Routing</div>
+  <pre>
+EAR = anchor
+EON = stabilize
+EXP = expand
+AIR = up
+AIV = down
+
+oi → AIR ↕ AIV
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Highway</div>
+  <pre>
+MODE: 5-Achs
+AXIS: EAR, EON, EXP, AIR, AIV
+OPERATOR: XI
+PATH: linear
+SLIDE: continuum
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Slalom</div>
+  <pre>
+RESPO: 3
+TARGET: 4
+PATH: EAR → EON → EXP → AIR → AIV
+SLIDE: continuum
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">TRANS‑WARB Modul</div>
+  <pre>
+oi: KANAL.oi
+SCALE: Φ(t)
+TRANSPORT: T_oi(t)
+DUAL: dualTransport
+AXIOME: Komplettum.Achsen
+OPERATOR: { XI, IX, X4 }
+HIGHWAY: Highway
+SLALOM: Slalom
+  </pre>
+</div>
+
+<div class="box">
+  <div class="title">Status</div>
+  <pre>
+Online
+  </pre>
+</div>
+
+</body>
+</html>
