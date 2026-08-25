@@ -2,133 +2,502 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>OI · Output‑Index · RAW</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">🌀 MAGNETO · GRAVITATION · ENERGIE · ATOM</title>
 
 <style>
-  body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
-  h1 { color:#ff6666; text-align:center; margin-bottom:30px; }
-  .box { background:#111; border:1px solid #333; padding:20px; margin-bottom:25px; }
-  .title { color:#ff6666; font-size:18px; margin-bottom:10px; }
-  pre { background:#000; padding:10px; border-left:3px solid #ff6666; white-space:pre-wrap; }
-  ul { list-style:none; padding:0; }
-  li { margin:8px 0; }
-  a { color:#6cf; text-decoration:none; }
+:root {
+    --bg: #0a0a12;
+    --fg: #0ff;
+    --gold: #ffd700;
+    --magnet: #ff00ff;
+    --grav: #ff6600;
+    --energie: #00ff88;
+    --atom: #66ccff;
+    --stone: #ffd700;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Consolas', monospace;
+    min-height: 100vh;
+    padding: 10px;
+}
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: rgba(10,10,20,0.7);
+    border: 1px solid rgba(255,170,0,0.05);
+    border-radius: 16px;
+    padding: 16px;
+    backdrop-filter: blur(10px);
+}
+.header {
+    text-align: center;
+    border-bottom: 1px solid rgba(255,170,0,0.05);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+.header h1 {
+    font-size: 28px;
+    background: linear-gradient(90deg, #ff00ff, #ff6600, #00ff88, #66ccff, #ffd700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 4px;
+}
+.header .sub {
+    color: #445555;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+.header .sub span { color: var(--gold); }
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+@media (max-width: 1100px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) { .grid { grid-template-columns: 1fr; } }
+
+.panel {
+    background: rgba(10,10,20,0.4);
+    border: 1px solid rgba(255,255,255,0.02);
+    border-radius: 12px;
+    padding: 12px;
+}
+.panel h2 {
+    color: var(--gold);
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255,255,255,0.02);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+.panel button {
+    background: rgba(20,35,35,0.2);
+    color: #668888;
+    border: 1px solid rgba(255,255,255,0.02);
+    padding: 4px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 9px;
+    transition: all 0.3s;
+    margin: 2px;
+}
+.panel button:hover { background: rgba(40,80,70,0.08); color: #aaeedd; }
+.panel button.gold { color: var(--gold); border-color: rgba(255,170,0,0.05); }
+.panel button.magnet { color: var(--magnet); border-color: rgba(255,0,255,0.05); }
+.panel button.grav { color: var(--grav); border-color: rgba(255,102,0,0.05); }
+.panel button.energie { color: var(--energie); border-color: rgba(0,255,136,0.05); }
+.panel button.atom { color: var(--atom); border-color: rgba(102,204,255,0.05); }
+.panel button.stone { color: var(--stone); border-color: rgba(255,215,0,0.05); }
+
+#output {
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    padding: 10px;
+    min-height: 60px;
+    font-size: 10px;
+    line-height: 1.4;
+    border: 1px solid rgba(255,255,255,0.02);
+    margin-top: 8px;
+    white-space: pre-wrap;
+    color: #88ddbb;
+    font-family: monospace;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 10px;
+    margin-top: 10px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 6px;
+    font-size: 9px;
+    color: #445555;
+    border: 1px solid rgba(255,255,255,0.01);
+    flex-wrap: wrap;
+}
+.status span { color: #88ddbb; }
+
+.footer {
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px;
+    color: #222;
+    font-size: 8px;
+    letter-spacing: 2px;
+    border-top: 1px solid rgba(255,255,255,0.01);
+}
+.footer span { color: var(--gold); }
+
+.stone-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 4px;
+    margin-top: 6px;
+}
+.stone-item {
+    background: #0e0e1a;
+    border: 1px solid #1a1a2a;
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+    font-size: 7px;
+    color: #666;
+}
+.stone-item .pos { color: var(--gold); font-weight: bold; }
+.stone-item .label { color: var(--fg); font-size: 6px; }
+.stone-item.active { border-color: var(--stone); background: rgba(255,215,0,0.05); }
+
+.metric-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 4px;
+    margin-top: 6px;
+}
+.metric {
+    background: #0e0e1a;
+    border: 1px solid #1a1a2a;
+    border-radius: 4px;
+    padding: 4px;
+    text-align: center;
+}
+.metric .label { color: #666; font-size: 6px; text-transform: uppercase; }
+.metric .value { font-size: 14px; font-weight: bold; }
+.metric.magnet .value { color: var(--magnet); }
+.metric.grav .value { color: var(--grav); }
+.metric.energie .value { color: var(--energie); }
+.metric.atom .value { color: var(--atom); }
+
+.vibration-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 2px;
+    margin-top: 6px;
+}
+.vibe {
+    background: #0e0e1a;
+    border: 1px solid #1a1a2a;
+    border-radius: 2px;
+    padding: 2px;
+    text-align: center;
+    font-size: 6px;
+    color: #666;
+}
+.vibe .val { color: var(--fg); font-size: 7px; }
+.vibe.active { border-color: var(--atom); background: rgba(102,204,255,0.05); }
 </style>
 </head>
-
 <body>
 
-<h1>OI · Output‑Index</h1>
+<div class="container">
 
-<div class="box">
-  <div class="title">Navigation</div>
-  <ul>
-    <li><a href="ID.html">ID</a></li>
-    <li><a href="README.md">README</a></li>
-    <li><a href="DualTr">DualTransport</a></li>
-    <li><a href="Highway.vector">Highway</a></li>
-    <li><a href="Routing.vector">Routing</a></li>
-    <li><a href="Slalom.vector">Slalom</a></li>
-    <li><a href="TRANS.vector">TRANS‑WARB</a></li>
-    <li><a href="WARB KANAL.vector">KANAL‑oi</a></li>
-    <li><a href="RECHNUNG.js">Transport‑Rechnung</a></li>
-    <li><a href="continuumSlide.js">continuumSlide</a></li>
-    <li><a href="axiom-dreieck-6.csv">Axiom‑Dreieck‑6</a></li>
-    <li><a href="modul-io-8.csv">Modul‑IO‑8</a></li>
-  </ul>
+<div class="header">
+    <h1 id="main-title">🌀 MAGNETO · GRAVITATION · ENERGIE · ATOM</h1>
+    <div class="sub" id="station-display">Station: <span id="station-name">—</span> · TP: <span id="tp-list">—</span></div>
 </div>
 
-<div class="box">
-  <div class="title">Unendlichkeits‑Operator</div>
-  <pre>
-K(t) = 1 / (1 - t)
-Φ(t) = φ∞ · K(t)
-  </pre>
+<div class="grid">
+
+    <!-- ===== PANEL 1: MAGNETO · GRAVITATION · ENERGIE · ATOM ===== -->
+    <div class="panel">
+        <h2>🧲 MAGNETO · GRAV · ENERGIE · ATOM</h2>
+        <button class="magnet" onclick="measureMagneto()">🧲 MAGNETO</button>
+        <button class="grav" onclick="measureGrav()">🌌 GRAVITATION</button>
+        <button class="energie" onclick="measureEnergie()">⚡ ENERGIE</button>
+        <button class="atom" onclick="measureAtom()">⚛ ATOM</button>
+        <button class="stone" onclick="measureAll()">🌀 ALLE</button>
+        <button class="gold" onclick="resetAll()">⟲ RESET</button>
+
+        <div class="metric-grid">
+            <div class="metric magnet"><div class="label">🧲 MAGNETO</div><div class="value" id="magnet-value">0.00</div></div>
+            <div class="metric grav"><div class="label">🌌 GRAV</div><div class="value" id="grav-value">0.00</div></div>
+            <div class="metric energie"><div class="label">⚡ ENERGIE</div><div class="value" id="energie-value">0.00</div></div>
+            <div class="metric atom"><div class="label">⚛ ATOM</div><div class="value" id="atom-value">0.00</div></div>
+        </div>
+
+        <div id="output">🌀 Universelle Index · Bereit · Wähle eine Messung</div>
+    </div>
+
+    <!-- ===== PANEL 2: STONE-EDGE PREFETCH ===== -->
+    <div class="panel">
+        <h2>🪨 STONE-EDGE PREFETCH · 8 UM 9</h2>
+        <button class="stone" onclick="prefetchStone()">🪨 PREFETCH</button>
+        <button class="gold" onclick="rotateStone()">🔄 ROTATE</button>
+
+        <div class="stone-grid" id="stone-grid">
+            <div class="stone-item active"><div class="pos">O</div><div class="label">TP12</div></div>
+            <div class="stone-item"><div class="pos">D</div><div class="label">TP9</div></div>
+            <div class="stone-item"><div class="pos">E</div><div class="label">TP12</div></div>
+            <div class="stone-item"><div class="pos">N</div><div class="label">TP6</div></div>
+            <div class="stone-item"><div class="pos">9</div><div class="label">KERN</div></div>
+            <div class="stone-item"><div class="pos">I</div><div class="label">TP8</div></div>
+            <div class="stone-item"><div class="pos">R</div><div class="label">TP4</div></div>
+            <div class="stone-item"><div class="pos">S</div><div class="label">TP3</div></div>
+            <div class="stone-item"><div class="pos">U</div><div class="label">TP9</div></div>
+        </div>
+
+        <div id="stone-output" style="margin-top:6px;background:rgba(0,0,0,0.3);border-radius:8px;padding:10px;font-size:10px;color:#88ddbb;min-height:30px;">
+            🪨 Stone-Edge · 8 um 9 · bereit
+        </div>
+    </div>
+
+    <!-- ===== PANEL 3: VIBRATIONEN · TAKTE ===== -->
+    <div class="panel">
+        <h2>🌀 VIBRATIONEN · TAKTE · MESSUNGEN</h2>
+        <button class="atom" onclick="startVibration()">🌀 VIBRATION START</button>
+        <button class="gold" onclick="stopVibration()">⏸ STOP</button>
+        <button class="magnet" onclick="logVibration()">📊 LOG</button>
+
+        <div class="vibration-grid" id="vibe-grid">
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+            <div class="vibe"><div class="val">0</div></div>
+        </div>
+
+        <div id="vibe-output" style="margin-top:6px;background:rgba(0,0,0,0.3);border-radius:8px;padding:10px;font-size:9px;color:#88ddbb;min-height:30px;">
+            ⏱️ Takt: 0 · Vibrationen: 0
+        </div>
+    </div>
+
 </div>
 
-<div class="box">
-  <div class="title">Transport‑Rechnung (OI)</div>
-  <pre>
-T_oi(t) = -Δx · K(t)
-io = +Δx · K(t)
-oi = -Δx · K(t)
-  </pre>
+<div class="status">
+    <span>🧲 MAGNETO: <span id="status-magnet">0.00</span></span>
+    <span>🌌 GRAV: <span id="status-grav">0.00</span></span>
+    <span>⚡ ENERGIE: <span id="status-energie">0.00</span></span>
+    <span>⚛ ATOM: <span id="status-atom">0.00</span></span>
+    <span>🌀 VIBE: <span id="status-vibe">0</span></span>
 </div>
 
-<div class="box">
-  <div class="title">Dual‑Transport</div>
-  <pre>
-function dualTransport(io, oi, dx, t) {
-    const K = 1 / (1 - t);
-    io.value = dx * K;
-    oi.value = -dx * K;
+<div class="footer"><span>🌀</span> UNIVERSAL · STATION-AWARE · 64 ACHSEN · <span>wieimmer4u</span></div>
+
+</div>
+
+<script>
+// ============================================================
+// MAGNETO · GRAVITATION · ENERGIE · ATOM · UNIVERSAL
+// ============================================================
+
+// ─── STATION DETEKTION ──────────────────────────────────────
+const station = detectStation();
+const tpList = [3,4,6,8,9,12];
+
+function detectStation() {
+    const path = window.location.pathname;
+    if (path.includes('IO')) return 'IO';
+    if (path.includes('OI')) return 'OI';
+    if (path.includes('IX')) return 'IX';
+    if (path.includes('XI')) return 'XI';
+    if (path.includes('TP3')) return 'TP3';
+    if (path.includes('TP4')) return 'TP4';
+    if (path.includes('TP6')) return 'TP6';
+    if (path.includes('TP8')) return 'TP8';
+    if (path.includes('TP9')) return 'TP9';
+    if (path.includes('TP12')) return 'TP12';
+    if (path.includes('CLOCK')) return 'CLOCK';
+    if (path.includes('TIME')) return 'TIME';
+    if (path.includes('NC.world')) return 'NC.world';
+    return 'UNIVERSAL';
 }
-  </pre>
-</div>
 
-<div class="box">
-  <div class="title">Routing</div>
-  <pre>
-EAR = anchor
-EON = stabilize
-EXP = expand
-AIR = up
-AIV = down
+// ─── DOM ──────────────────────────────────────────────────────
+document.getElementById('station-name').textContent = station;
+document.getElementById('tp-list').textContent = tpList.join(' · ');
+document.title = `🌀 ${station} · MAGNETO · GRAV · ENERGIE · ATOM`;
+document.getElementById('main-title').textContent = `🌀 ${station} · MAGNETO · GRAVITATION · ENERGIE · ATOM`;
 
-oi → AIR ↕ AIV
-  </pre>
-</div>
+// ─── STATE ────────────────────────────────────────────────────
+const state = {
+    magneto: 0,
+    grav: 0,
+    energie: 0,
+    atom: 0,
+    vibe: 0,
+    running: false,
+    timer: null,
+    log: []
+};
 
-<div class="box">
-  <div class="title">Highway</div>
-  <pre>
-MODE: 5-Achs
-AXIS: EAR, EON, EXP, AIR, AIV
-OPERATOR: XI
-PATH: linear
-SLIDE: continuum
-  </pre>
-</div>
+// ─── MESSWERTE ──────────────────────────────────────────────
+function updateUI() {
+    document.getElementById('magnet-value').textContent = state.magneto.toFixed(3);
+    document.getElementById('grav-value').textContent = state.grav.toFixed(3);
+    document.getElementById('energie-value').textContent = state.energie.toFixed(3);
+    document.getElementById('atom-value').textContent = state.atom.toFixed(3);
+    document.getElementById('status-magnet').textContent = state.magneto.toFixed(3);
+    document.getElementById('status-grav').textContent = state.grav.toFixed(3);
+    document.getElementById('status-energie').textContent = state.energie.toFixed(3);
+    document.getElementById('status-atom').textContent = state.atom.toFixed(3);
+    document.getElementById('status-vibe').textContent = state.vibe;
+}
 
-<div class="box">
-  <div class="title">Slalom</div>
-  <pre>
-RESPO: 3
-TARGET: 4
-PATH: EAR → EON → EXP → AIR → AIV
-SLIDE: continuum
-  </pre>
-</div>
+function log(msg) {
+    const output = document.getElementById('output');
+    const time = new Date().toLocaleTimeString();
+    output.textContent = `[${time}] ${msg}`;
+}
 
-<div class="box">
-  <div class="title">TRANS‑WARB</div>
-  <pre>
-io: KANAL.io
-oi: KANAL.oi
-SCALE: Φ(t)
-TRANSPORT: T_oi(t)
-DUAL: dualTransport
-AXIOME: Komplettum.Achsen
-OPERATOR: { XI, IX, X4 }
-HIGHWAY: Highway
-SLALOM: Slalom
-  </pre>
-</div>
+// ─── MAGNETO ─────────────────────────────────────────────────
+function measureMagneto() {
+    const base = station.length * 3.14159 + 0.618;
+    state.magneto = base * (1 + Math.sin(Date.now() / 1000) * 0.1);
+    updateUI();
+    log(`🧲 MAGNETO: ${state.magneto.toFixed(3)} · Station: ${station}`);
+}
 
-<div class="box">
-  <div class="title">Reise‑Formel</div>
-  <pre>
-HOME → (6 Axiome) → ORT
-→ TRANS‑WARB → CUBIT → TRANS‑WARB → ZIEL
-  </pre>
-</div>
+// ─── GRAVITATION ────────────────────────────────────────────
+function measureGrav() {
+    const base = tpList.reduce((a,b) => a+b, 0) * 0.618;
+    state.grav = base * (1 + Math.cos(Date.now() / 1200) * 0.08);
+    updateUI();
+    log(`🌌 GRAVITATION: ${state.grav.toFixed(3)} · TP-Summe: ${tpList.reduce((a,b) => a+b, 0)}`);
+}
 
-<div class="box">
-  <div class="title">Status</div>
-  <pre>
-Online
-  </pre>
-</div>
+// ─── ENERGIE ─────────────────────────────────────────────────
+function measureEnergie() {
+    const base = (state.magneto + state.grav) / 2;
+    state.energie = base * (1 + Math.sin(Date.now() / 800) * 0.12);
+    updateUI();
+    log(`⚡ ENERGIE: ${state.energie.toFixed(3)} · Basis: ${base.toFixed(3)}`);
+}
 
+// ─── ATOM ────────────────────────────────────────────────────
+function measureAtom() {
+    const base = (state.magneto + state.grav + state.energie) / 3;
+    state.atom = base * (1 + Math.cos(Date.now() / 600) * 0.15);
+    updateUI();
+    log(`⚛ ATOM: ${state.atom.toFixed(3)} · Vibration: ${state.vibe}`);
+}
+
+// ─── ALLE ──────────────────────────────────────────────────
+function measureAll() {
+    measureMagneto();
+    setTimeout(measureGrav, 100);
+    setTimeout(measureEnergie, 200);
+    setTimeout(measureAtom, 300);
+    log('🌀 ALLE Messungen gestartet');
+}
+
+// ─── STONE-EDGE PREFETCH ────────────────────────────────────
+function prefetchStone() {
+    const stonePositions = ['O','D','E','N','9','I','R','S','U'];
+    const stoneTPs = ['TP12','TP9','TP12','TP6','KERN','TP8','TP4','TP3','TP9'];
+    const grid = document.getElementById('stone-grid');
+    const items = grid.querySelectorAll('.stone-item');
+    items.forEach((el, i) => {
+        const pos = stonePositions[(i + state.vibe) % stonePositions.length];
+        const tp = stoneTPs[(i + state.vibe) % stoneTPs.length];
+        el.querySelector('.pos').textContent = pos;
+        el.querySelector('.label').textContent = tp;
+        el.classList.toggle('active', i === 4 || pos === '9');
+    });
+    document.getElementById('stone-output').textContent =
+        `🪨 Stone-Edge Prefetch · Rotation: ${state.vibe} · 8 um 9 · Kern: 9`;
+    log(`🪨 STONE-EDGE · Rotation ${state.vibe}`);
+}
+
+// ─── ROTATE STONE ──────────────────────────────────────────
+function rotateStone() {
+    state.vibe = (state.vibe + 1) % 9;
+    prefetchStone();
+}
+
+// ─── VIBRATIONEN ────────────────────────────────────────────
+function startVibration() {
+    if (state.running) return;
+    state.running = true;
+    state.timer = setInterval(() => {
+        state.vibe = (state.vibe + 1) % 9;
+        const vals = Array.from({length: 8}, () => Math.floor(Math.random() * 100));
+        const vibeEls = document.querySelectorAll('.vibe');
+        vibeEls.forEach((el, i) => {
+            const val = vals[i % vals.length];
+            el.querySelector('.val').textContent = val;
+            el.classList.toggle('active', val > 50);
+        });
+        document.getElementById('vibe-output').textContent =
+            `⏱️ Takt: ${state.vibe} · Vibrationen: ${vals.reduce((a,b) => a+b, 0)}`;
+        // Messwerte bei jeder Vibration
+        measureMagneto();
+        setTimeout(measureGrav, 50);
+        setTimeout(measureEnergie, 100);
+        setTimeout(measureAtom, 150);
+        updateUI();
+        log(`🌀 VIBRATION #${state.vibe} · ${vals.reduce((a,b) => a+b, 0)} Einheiten`);
+    }, 1000);
+    log('🌀 VIBRATION gestartet');
+}
+
+function stopVibration() {
+    if (state.timer) {
+        clearInterval(state.timer);
+        state.timer = null;
+    }
+    state.running = false;
+    log('⏸ VIBRATION gestoppt');
+}
+
+function logVibration() {
+    state.log.push({
+        time: new Date().toISOString(),
+        magneto: state.magneto,
+        grav: state.grav,
+        energie: state.energie,
+        atom: state.atom,
+        vibe: state.vibe
+    });
+    log(`📊 LOG #${state.log.length} · Magnet: ${state.magneto.toFixed(3)} · Atom: ${state.atom.toFixed(3)}`);
+}
+
+// ─── RESET ──────────────────────────────────────────────────
+function resetAll() {
+    stopVibration();
+    state.magneto = 0;
+    state.grav = 0;
+    state.energie = 0;
+    state.atom = 0;
+    state.vibe = 0;
+    state.log = [];
+    updateUI();
+    document.getElementById('vibe-output').textContent = '⏱️ Takt: 0 · Vibrationen: 0';
+    const vibeEls = document.querySelectorAll('.vibe');
+    vibeEls.forEach(el => {
+        el.querySelector('.val').textContent = '0';
+        el.classList.remove('active');
+    });
+    log('⟲ RESET · Alle Werte zurückgesetzt');
+}
+
+// ─── TASTATUR ──────────────────────────────────────────────
+document.addEventListener('keydown', (e) => {
+    if (e.key === '1') measureMagneto();
+    if (e.key === '2') measureGrav();
+    if (e.key === '3') measureEnergie();
+    if (e.key === '4') measureAtom();
+    if (e.key === '5') measureAll();
+    if (e.key === '6') prefetchStone();
+    if (e.key === '7') rotateStone();
+    if (e.key === '8') startVibration();
+    if (e.key === '9') stopVibration();
+    if (e.key === '0') resetAll();
+});
+
+// ─── INIT ──────────────────────────────────────────────────
+updateUI();
+prefetchStone();
+log(`🌀 UNIVERSAL · Station: ${station} · TP: ${tpList.join(' · ')}`);
+console.log(`⌨️  1=Magneto 2=Grav 3=Energie 4=Atom 5=Alle 6=Stone 7=Rotate 8=Vibe 9=Stop 0=Reset`);
+</script>
 </body>
 </html>
