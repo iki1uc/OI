@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>IKI1UC – TP9 Systemübersicht</title>
+
+<style>
+    body { background:#0a0a0a; color:#e0e0e0; font-family:Arial; }
+    h1,h2 { color:#00e0ff; }
+    table { width:100%; border-collapse:collapse; margin-bottom:40px; }
+    th,td { border:1px solid #333; padding:8px; }
+    th { background:#111; color:#00e0ff; }
+    .section { margin-bottom:60px; }
+    .idbox { background:#111; padding:10px; border:1px solid #333; margin-bottom:20px; }
+</style>
+</head>
+
+<body>
+
+<h1>IKI1UC – TP9 Systemübersicht</h1>
+
+<div class="idbox">
+    <strong>System‑ID:</strong> IKI1UC-TP9-SYSID-AX12-ORBIT3-V1.0
+</div>
+
+<div class="section"><h2>12 Achsen</h2><table id="achsen"></table></div>
+<div class="section"><h2>Orbit</h2><table id="orbit"></table></div>
+<div class="section"><h2>Pipeline</h2><table id="pipeline"></table></div>
+<div class="section"><h2>Algorithmus</h2><table id="algorithmus"></table></div>
+<div class="section"><h2>Marktrollen</h2><table id="marktrolle"></table></div>
+<div class="section"><h2>Cache</h2><table id="cache"></table></div>
+<div class="section"><h2>X4</h2><table id="x4"></table></div>
+<div class="section"><h2>Modul‑Marktrollen</h2><table id="modulrolle"></table></div>
+<div class="section"><h2>TP‑Marktrollen</h2><table id="tprolle"></table></div>
+
+<script>
+async function loadCSV(file, elementId) {
+    const response = await fetch(file);
+    const text = await response.text();
+    const rows = text.trim().split("\n").map(r => r.split(","));
+    
+    let html = "<tr>";
+    rows[0].forEach(h => html += "<th>"+h+"</th>");
+    html += "</tr>";
+
+    for(let i=1;i<rows.length;i++){
+        html += "<tr>";
+        rows[i].forEach(c => html += "<td>"+c+"</td>");
+        html += "</tr>";
+    }
+
+    document.getElementById(elementId).innerHTML = html;
+}
+
+loadCSV("tp-achsen-12.csv", "achsen");
+loadCSV("tp-orbit-3.csv", "orbit");
+loadCSV("tp-pipeline-12.csv", "pipeline");
+loadCSV("tp-algorithmus-12.csv", "algorithmus");
+loadCSV("tp-marktrolle-12.csv", "marktrolle");
+loadCSV("tp-cache-matrix.csv", "cache");
+loadCSV("tp-x4-matrix.csv", "x4");
+loadCSV("modul-marktrolle-12.csv", "modulrolle");
+loadCSV("tp-marktrolle-5.csv", "tprolle");
+</script>
+
+</body>
+</html>

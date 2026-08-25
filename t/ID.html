@@ -1,0 +1,109 @@
+# TP9 – Normmodul  
+System-ID: IKI1UC-TP9-SYSID-AX12-ORBIT3-V1.0
+
+TP9 ist das zentrale Normmodul des IKI1UC-Systems.  
+Es überwacht die Normen, Regeln und Bewertungsmechanismen aller Achsen, Pipelines und Orbit-Zustände.  
+TP9 stellt sicher, dass das System korrekt, stabil und regelkonform arbeitet.
+
+---
+
+## 📌 Kernfunktionen von TP9
+
+- Normierung aller Achsen (IX → ORBIT-OUT)
+- Bewertung der Pipeline-Stufen
+- Regulierung der Orbit-Stabilität
+- Kontrolle der Cache-PRE/POST Zustände
+- Aktivierung der Normmodule (FIT, FIX, RDY, MISS, ERROR)
+- Unterstützung des Multi-Vektor X4 durch Norm-Kontrolle
+
+TP9 ist das Modul, das entscheidet, ob ein Zustand **gültig**, **brauchbar**,  
+**fehlerhaft** oder **optimierbar** ist.
+
+---
+
+## 📁 Eingebundene CSV-Dateien
+
+### tp-achsen-12.csv  
+Definiert die 12 Achsen des Systems.
+
+### tp-orbit-3.csv  
+Orbit-Ebenen: Eingang, Stabil, Ausgang.
+
+### tp-pipeline-12.csv  
+Pipeline-Stufen für alle Achsen.
+
+### tp-algorithmus-12.csv  
+Algorithmische Funktionen jeder Achse.
+
+### tp-marktrolle-12.csv  
+Marktrollen der 12 Achsen.
+
+### tp-cache-matrix.csv  
+Cache-PRE/POST-Zustände und Cache-Funktionen.
+
+### tp-x4-matrix.csv  
+X4-Kompatibilität jeder Achse.
+
+### modul-marktrolle-12.csv  
+Marktrollen der 12 Grundmodule.
+
+### tp-marktrolle-5.csv  
+Marktrollen der TP-Module.
+
+---
+
+## 🔧 Rolle von TP9 im System
+
+TP9 ist das **Normmodul** und übernimmt:
+
+- Normierung aller Vektor-Zustände  
+- Bewertung der Pipeline-Stufen  
+- Regulierung der Orbit-Stabilität  
+- Kontrolle der Cache-PRE/POST Zustände  
+- Aktivierung der Normmodule (FIT, FIX, RDY, MISS, ERROR)
+
+TP9 ist notwendig, damit:
+
+- X4 korrekt bewertet wird  
+- Cache stabil arbeitet  
+- Orbit nicht kollidiert  
+- Pipeline 9 vollständig nutzbar ist  
+- Marktrollen korrekt zugewiesen werden  
+
+---
+
+## 📌 Status
+
+TP9 ist **AKTIV** und vollständig eingebunden.  
+Alle relevanten CSV-Dateien sind vorhanden.
+
+---
+
+## 🔗 Weiterführende Module
+
+- **[TP3](ca://s?q=TP3_Info)** – Norm-Regulatorik  
+- **[TP4](ca://s?q=TP4_Info)** – Pipeline-Synthese  
+- **[TP6](ca://s?q=TP6_Info)** – Anker-Kern  
+- **[TP12](ca://s?q=TP12_Info)** – Orbit-Meta  
+
+---
+
+## 🧩 Kompatibilität
+
+TP9 ist kompatibel mit:
+
+- 12-Achsen-Matrix  
+- Orbit-3  
+- Cache-Matrix  
+- X4-Matrix  
+- Pipeline-12  
+- Marktrolle-12  
+- TP-Marktrolle-5  
+
+---
+
+## 📜 Version
+
+Version: **1.0**  
+System-ID: **IKI1UC-TP9-SYSID-AX12-ORBIT3-V1.0**
+
